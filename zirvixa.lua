@@ -25,6 +25,13 @@ function zay:Run(id)
 		return (suc and gui) or player:WaitForChild("PlayerGui")
 	end
 
+	-- Detect and close any existing old key system UI instance
+	local targetParent = getUIParent()
+	local oldUi = targetParent:FindFirstChild("mom im famous")
+	if oldUi then
+		oldUi:Destroy()
+	end
+
 	local function notify(title, text, time)
 		pcall(function()
 			game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -35,12 +42,12 @@ function zay:Run(id)
 		end)
 	end
 
-	-- Dark Red and Right Half Dark Purple Split Theme
+	-- Adjusted Theme to vibrant dark red tones (completely removed purple/blue looks)
 	local Theme = {
-		Background = Color3.fromRGB(30, 0, 5), -- Base dark red fallback
-		TopBar = Color3.fromRGB(20, 0, 20),
-		InputBG = Color3.fromRGB(25, 5, 25),
-		Accent = Color3.fromRGB(80, 0, 100),
+		Background = Color3.fromRGB(90, 10, 15), -- Solid clear dark red background
+		TopBar = Color3.fromRGB(65, 5, 10),
+		InputBG = Color3.fromRGB(75, 12, 16),
+		Accent = Color3.fromRGB(160, 20, 30),
 		Success = Color3.fromRGB(0, 200, 0),
 		Failure = Color3.fromRGB(200, 0, 0)
 	}
@@ -80,7 +87,7 @@ function zay:Run(id)
 	no.Name = "mom im famous"
 	no.ResetOnSpawn = false
 	no.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	no.Parent = getUIParent()
+	no.Parent = targetParent
 
 	local mother = Instance.new("Frame")
 	mother.Name = "MainFrame"
@@ -91,13 +98,11 @@ function zay:Run(id)
 	mother.ClipsDescendants = true
 	mother.Parent = no
 
-	-- Left half Dark Red, Right half Dark Purple Split Gradient
+	-- Redesigned Gradient to display fully dark red across the board
 	local splitGradient = Instance.new("UIGradient")
 	splitGradient.Color = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.0, Color3.fromRGB(35, 2, 5)),    -- Dark Red
-		ColorSequenceKeypoint.new(0.48, Color3.fromRGB(35, 2, 5)),   -- Hard split line left
-		ColorSequenceKeypoint.new(0.52, Color3.fromRGB(20, 2, 35)),  -- Hard split line right
-		ColorSequenceKeypoint.new(1.0, Color3.fromRGB(20, 2, 35))    -- Dark Purple
+		ColorSequenceKeypoint.new(0.0, Color3.fromRGB(110, 15, 20)),   -- Clear Dark Red Left
+		ColorSequenceKeypoint.new(1.0, Color3.fromRGB(80, 8, 12))      -- Clear Dark Red Right
 	})
 	splitGradient.Rotation = 0
 	splitGradient.Parent = mother
@@ -107,7 +112,7 @@ function zay:Run(id)
 	dad.Parent = mother
 
 	local dude = Instance.new("UIStroke")
-	dude.Color = Color3.fromRGB(55, 15, 55)
+	dude.Color = Color3.fromRGB(140, 25, 30)
 	dude.Thickness = 1.5
 	dude.Transparency = 1
 	dude.Parent = mother
@@ -144,7 +149,7 @@ function zay:Run(id)
 
 	local bro = Instance.new("TextLabel")
 	bro.Name = "Title"
-	bro.Size = UDim2.new(1, -40, 1, 0)
+	bro.Size = UDim2.new(1, -80, 1, 0)
 	bro.Position = UDim2.new(0, 20, 0, 0)
 	bro.BackgroundTransparency = 1
 	bro.Text = "js a key system lmao"
@@ -157,16 +162,42 @@ function zay:Run(id)
 
 	local like = Instance.new("TextLabel")
 	like.Name = "Subtitle"
-	like.Size = UDim2.new(1, -40, 0, 15)
+	like.Size = UDim2.new(1, -80, 0, 15)
 	like.Position = UDim2.new(0, 145, 0.5, -7)
 	like.BackgroundTransparency = 1
 	like.Text = "hi"
-	like.TextColor3 = Color3.fromRGB(150, 100, 150)
+	like.TextColor3 = Color3.fromRGB(200, 140, 145)
 	like.TextSize = 12
 	like.Font = Enum.Font.Gotham
 	like.TextXAlignment = Enum.TextXAlignment.Left
 	like.TextTransparency = 1
 	like.Parent = nope
+
+	-- Red Close (X) Button positioned on the TopBar
+	local closeButton = Instance.new("TextButton")
+	closeButton.Name = "CloseButton"
+	closeButton.Size = UDim2.new(0, 30, 0, 30)
+	closeButton.Position = UDim2.new(1, -38, 0.5, -15)
+	closeButton.BackgroundTransparency = 1
+	closeButton.Text = "X"
+	closeButton.TextColor3 = Color3.fromRGB(240, 50, 60)
+	closeButton.TextSize = 16
+	closeButton.Font = Enum.Font.GothamBold
+	closeButton.TextTransparency = 1
+	closeButton.ZIndex = 5
+	closeButton.Parent = nope
+
+	closeButton.MouseEnter:Connect(function()
+		TweenService:Create(closeButton, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(255, 90, 100)}):Play()
+	end)
+	closeButton.MouseLeave:Connect(function()
+		TweenService:Create(closeButton, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(240, 50, 60)}):Play()
+	end)
+	closeButton.MouseButton1Click:Connect(function()
+		TweenService:Create(mother, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0, 0, 0, 0), Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
+		task.wait(0.4)
+		no:Destroy()
+	end)
 
 	local UIListLayout = Instance.new("Frame")
 	UIListLayout.Name = "yo js a key system fam"
@@ -181,7 +212,7 @@ function zay:Run(id)
 	CopyButton.Position = UDim2.new(0, 20, 0, 15)
 	CopyButton.BackgroundTransparency = 1
 	CopyButton.Text = "js get the key from discord mate"
-	CopyButton.TextColor3 = Color3.fromRGB(180, 160, 180)
+	CopyButton.TextColor3 = Color3.fromRGB(220, 180, 185)
 	CopyButton.TextSize = 13
 	CopyButton.Font = Enum.Font.Gotham
 	CopyButton.TextWrapped = true
@@ -204,7 +235,7 @@ function zay:Run(id)
 	CopyStroke.Parent = CopyCorner
 
 	local SubmitButton = Instance.new("UIStroke")
-	SubmitButton.Color = Color3.fromRGB(60, 20, 70)
+	SubmitButton.Color = Color3.fromRGB(120, 30, 35)
 	SubmitButton.Thickness = 1
 	SubmitButton.Transparency = 1
 	SubmitButton.Parent = CopyCorner
@@ -215,7 +246,7 @@ function zay:Run(id)
 	SubmitCorner.BackgroundTransparency = 1
 	SubmitCorner.Text = ""
 	SubmitCorner.PlaceholderText = "enter the key here"
-	SubmitCorner.PlaceholderColor3 = Color3.fromRGB(110, 80, 110)
+	SubmitCorner.PlaceholderColor3 = Color3.fromRGB(150, 90, 95)
 	SubmitCorner.TextColor3 = Color3.fromRGB(255, 255, 255)
 	SubmitCorner.TextSize = 14
 	SubmitCorner.Font = Enum.Font.Gotham
@@ -254,7 +285,7 @@ function zay:Run(id)
 	stroke.Parent = button
 
 	local baseColor = Instance.new("UIStroke")
-	baseColor.Color = Color3.fromRGB(65, 25, 75)
+	baseColor.Color = Color3.fromRGB(130, 35, 40)
 	baseColor.Thickness = 1
 	baseColor.Transparency = 1
 	baseColor.Parent = button
@@ -262,7 +293,7 @@ function zay:Run(id)
 	local hoverColor = Instance.new("TextButton")
 	hoverColor.Name = "SubmitButton"
 	hoverColor.Size = UDim2.new(0.5, -6, 1, 0)
-	hoverColor.BackgroundColor3 = Color3.fromRGB(45, 15, 50)
+	hoverColor.BackgroundColor3 = Color3.fromRGB(110, 20, 25)
 	hoverColor.BorderSizePixel = 0
 	hoverColor.Text = "submit key"
 	hoverColor.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -305,8 +336,8 @@ function zay:Run(id)
 		end)
 	end
 
-	dragging(button, baseColor, Theme.InputBG, Color3.fromRGB(50, 10, 30), Color3.fromRGB(90, 20, 110), Color3.fromRGB(65, 25, 75))
-	dragging(hoverColor, hoverStroke, Color3.fromRGB(45, 15, 50), Color3.fromRGB(70, 20, 80), Color3.fromRGB(140, 20, 170), Theme.Accent)
+	dragging(button, baseColor, Theme.InputBG, Color3.fromRGB(110, 15, 20), Color3.fromRGB(180, 30, 40), Color3.fromRGB(130, 35, 40))
+	dragging(hoverColor, hoverStroke, Color3.fromRGB(110, 20, 25), Color3.fromRGB(140, 25, 30), Color3.fromRGB(220, 35, 45), Theme.Accent)
 
 	local draggingToggle, dragInput, dragStart, startPos
 	nope.InputBegan:Connect(function(input)
@@ -375,14 +406,14 @@ function zay:Run(id)
 		laser.Name = "Laser"
 		laser.Size = UDim2.new(1, 0, 0, 3)
 		laser.Position = UDim2.new(0, 0, -0.1, 0)
-		laser.BackgroundColor3 = Color3.fromRGB(255, 50, 100)
+		laser.BackgroundColor3 = Color3.fromRGB(255, 60, 70)
 		laser.BorderSizePixel = 0
 		laser.ZIndex = 102
 		laser.Parent = scanOverlay
 
 		local flare = Instance.new("Frame")
 		flare.Size = UDim2.new(1, 0, 0, 60)
-		flare.BackgroundColor3 = Color3.fromRGB(255, 50, 120)
+		flare.BackgroundColor3 = Color3.fromRGB(255, 50, 60)
 		flare.BackgroundTransparency = 0.93
 		flare.BorderSizePixel = 0
 		flare.ZIndex = 101
@@ -447,7 +478,7 @@ function zay:Run(id)
 			task.spawn(function()
 				-- Override to pure error red flash on split sequence
 				local originalSequence = splitGradient.Color
-				splitGradient.Color = ColorSequence.new(Color3.fromRGB(70, 0, 10))
+				splitGradient.Color = ColorSequence.new(Color3.fromRGB(150, 0, 10))
 				
 				local shakeIntensity = {16, -14, 11, -9, 6, -3, 0}
 				for _, offset in ipairs(shakeIntensity) do
@@ -457,7 +488,7 @@ function zay:Run(id)
 					task.wait(0.03)
 				end
 				
-				-- Return background to correct dark red / purple split design
+				-- Return background to correct pure dark red gradient setup
 				splitGradient.Color = originalSequence
 				TweenService:Create(mother, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = originalPos}):Play()
 			end)
@@ -507,6 +538,7 @@ function zay:Run(id)
 		TweenService:Create(abs, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
 		TweenService:Create(bro, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
 		TweenService:Create(like, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
+		TweenService:Create(closeButton, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
 		TweenService:Create(CopyButton, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
 		TweenService:Create(CopyCorner, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
 		TweenService:Create(SubmitButton, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 0}):Play()
