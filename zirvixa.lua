@@ -35,16 +35,14 @@ function zay:Run(id)
 		end)
 	end
 
-	-- Brand New Luxury Split Theme Colors
+	-- Dark Red and Right Half Dark Purple Split Theme
 	local Theme = {
-		Background = Color3.fromRGB(15, 10, 15),
-		GradientLeft = Color3.fromRGB(45, 5, 15),     -- Deep Dark Red
-		GradientRight = Color3.fromRGB(25, 5, 40),    -- Velvet Dark Purple
-		TopBar = Color3.fromRGB(20, 12, 22),
-		InputBG = Color3.fromRGB(24, 15, 26),
-		Accent = Color3.fromRGB(120, 30, 140),
-		Success = Color3.fromRGB(0, 235, 120),
-		Failure = Color3.fromRGB(240, 30, 60)
+		Background = Color3.fromRGB(30, 0, 5), -- Base dark red fallback
+		TopBar = Color3.fromRGB(20, 0, 20),
+		InputBG = Color3.fromRGB(25, 5, 25),
+		Accent = Color3.fromRGB(80, 0, 100),
+		Success = Color3.fromRGB(0, 200, 0),
+		Failure = Color3.fromRGB(200, 0, 0)
 	}
 
 	local function runkey(key)
@@ -88,26 +86,28 @@ function zay:Run(id)
 	mother.Name = "MainFrame"
 	mother.Size = UDim2.new(0, 0, 0, 0)
 	mother.Position = UDim2.new(0.5, 0, 0.5, 0)
-	mother.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	mother.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Needed for gradient
 	mother.BorderSizePixel = 0
 	mother.ClipsDescendants = true
 	mother.Parent = no
 
-	-- Dynamic Dark Red / Dark Purple Split Background
-	local bgGradient = Instance.new("UIGradient")
-	bgGradient.Color = ColorSequence.new({
-		ColorSequenceKeypoint.new(0, Theme.GradientLeft),
-		ColorSequenceKeypoint.new(1, Theme.GradientRight)
+	-- Left half Dark Red, Right half Dark Purple Split Gradient
+	local splitGradient = Instance.new("UIGradient")
+	splitGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.0, Color3.fromRGB(35, 2, 5)),    -- Dark Red
+		ColorSequenceKeypoint.new(0.48, Color3.fromRGB(35, 2, 5)),   -- Hard split line left
+		ColorSequenceKeypoint.new(0.52, Color3.fromRGB(20, 2, 35)),  -- Hard split line right
+		ColorSequenceKeypoint.new(1.0, Color3.fromRGB(20, 2, 35))    -- Dark Purple
 	})
-	bgGradient.Rotation = 45
-	bgGradient.Parent = mother
+	splitGradient.Rotation = 0
+	splitGradient.Parent = mother
 
 	local dad = Instance.new("UICorner")
-	dad.CornerRadius = UDim.new(0, 12)
+	dad.CornerRadius = UDim.new(0, 9)
 	dad.Parent = mother
 
 	local dude = Instance.new("UIStroke")
-	dude.Color = Color3.fromRGB(60, 20, 65)
+	dude.Color = Color3.fromRGB(55, 15, 55)
 	dude.Thickness = 1.5
 	dude.Transparency = 1
 	dude.Parent = mother
@@ -117,7 +117,7 @@ function zay:Run(id)
 	dogpound.BackgroundTransparency = 1
 	dogpound.Text = "mom im famous"
 	dogpound.TextColor3 = Color3.fromRGB(255, 255, 255)
-	dogpound.TextSize = 28
+	dogpound.TextSize = 24
 	dogpound.Font = Enum.Font.GothamBold
 	dogpound.TextTransparency = 1
 	dogpound.Parent = mother
@@ -131,7 +131,7 @@ function zay:Run(id)
 	nope.Parent = mother
 
 	local cool = Instance.new("UICorner")
-	cool.CornerRadius = UDim.new(0, 12)
+	cool.CornerRadius = UDim.new(0, 9)
 	cool.Parent = nope
 
 	local abs = Instance.new("Frame")
@@ -147,8 +147,8 @@ function zay:Run(id)
 	bro.Size = UDim2.new(1, -40, 1, 0)
 	bro.Position = UDim2.new(0, 20, 0, 0)
 	bro.BackgroundTransparency = 1
-	bro.Text = "zay key system"
-	bro.TextColor3 = Color3.fromRGB(255, 255, 255)
+	bro.Text = "js a key system lmao"
+	bro.TextColor3 = Color3.fromRGB(240, 240, 240)
 	bro.TextSize = 15
 	bro.Font = Enum.Font.GothamBold
 	bro.TextXAlignment = Enum.TextXAlignment.Left
@@ -158,12 +158,12 @@ function zay:Run(id)
 	local like = Instance.new("TextLabel")
 	like.Name = "Subtitle"
 	like.Size = UDim2.new(1, -40, 0, 15)
-	like.Position = UDim2.new(0, 135, 0.5, -7)
+	like.Position = UDim2.new(0, 145, 0.5, -7)
 	like.BackgroundTransparency = 1
-	like.Text = "v2"
-	like.TextColor3 = Color3.fromRGB(180, 100, 200)
+	like.Text = "hi"
+	like.TextColor3 = Color3.fromRGB(150, 100, 150)
 	like.TextSize = 12
-	like.Font = Enum.Font.GothamBold
+	like.Font = Enum.Font.Gotham
 	like.TextXAlignment = Enum.TextXAlignment.Left
 	like.TextTransparency = 1
 	like.Parent = nope
@@ -180,8 +180,8 @@ function zay:Run(id)
 	CopyButton.Size = UDim2.new(1, -40, 0, 40)
 	CopyButton.Position = UDim2.new(0, 20, 0, 15)
 	CopyButton.BackgroundTransparency = 1
-	CopyButton.Text = "Please retrieve your validation code via our official Discord community link below."
-	CopyButton.TextColor3 = Color3.fromRGB(220, 200, 220)
+	CopyButton.Text = "js get the key from discord mate"
+	CopyButton.TextColor3 = Color3.fromRGB(180, 160, 180)
 	CopyButton.TextSize = 13
 	CopyButton.Font = Enum.Font.Gotham
 	CopyButton.TextWrapped = true
@@ -200,11 +200,11 @@ function zay:Run(id)
 	CopyCorner.Parent = UIListLayout
 
 	local CopyStroke = Instance.new("UICorner")
-	CopyStroke.CornerRadius = UDim.new(0, 8)
+	CopyStroke.CornerRadius = UDim.new(0, 6)
 	CopyStroke.Parent = CopyCorner
 
 	local SubmitButton = Instance.new("UIStroke")
-	SubmitButton.Color = Color3.fromRGB(90, 30, 100)
+	SubmitButton.Color = Color3.fromRGB(60, 20, 70)
 	SubmitButton.Thickness = 1
 	SubmitButton.Transparency = 1
 	SubmitButton.Parent = CopyCorner
@@ -214,8 +214,8 @@ function zay:Run(id)
 	SubmitCorner.Position = UDim2.new(0, 10, 0, 0)
 	SubmitCorner.BackgroundTransparency = 1
 	SubmitCorner.Text = ""
-	SubmitCorner.PlaceholderText = "Paste credentials here..."
-	SubmitCorner.PlaceholderColor3 = Color3.fromRGB(130, 90, 140)
+	SubmitCorner.PlaceholderText = "enter the key here"
+	SubmitCorner.PlaceholderColor3 = Color3.fromRGB(110, 80, 110)
 	SubmitCorner.TextColor3 = Color3.fromRGB(255, 255, 255)
 	SubmitCorner.TextSize = 14
 	SubmitCorner.Font = Enum.Font.Gotham
@@ -240,8 +240,8 @@ function zay:Run(id)
 	button.Size = UDim2.new(0.5, -6, 1, 0)
 	button.BackgroundColor3 = Theme.InputBG
 	button.BorderSizePixel = 0
-	button.Text = "Get Key"
-	button.TextColor3 = Color3.fromRGB(240, 220, 240)
+	button.Text = "get key"
+	button.TextColor3 = Color3.fromRGB(230, 230, 230)
 	button.TextSize = 13
 	button.Font = Enum.Font.GothamBold
 	button.AutoButtonColor = false
@@ -250,11 +250,11 @@ function zay:Run(id)
 	button.Parent = SubmitStroke
 
 	local stroke = Instance.new("UICorner")
-	stroke.CornerRadius = UDim.new(0, 8)
+	stroke.CornerRadius = UDim.new(0, 6)
 	stroke.Parent = button
 
 	local baseColor = Instance.new("UIStroke")
-	baseColor.Color = Color3.fromRGB(100, 30, 110)
+	baseColor.Color = Color3.fromRGB(65, 25, 75)
 	baseColor.Thickness = 1
 	baseColor.Transparency = 1
 	baseColor.Parent = button
@@ -262,9 +262,9 @@ function zay:Run(id)
 	local hoverColor = Instance.new("TextButton")
 	hoverColor.Name = "SubmitButton"
 	hoverColor.Size = UDim2.new(0.5, -6, 1, 0)
-	hoverColor.BackgroundColor3 = Color3.fromRGB(50, 15, 60)
+	hoverColor.BackgroundColor3 = Color3.fromRGB(45, 15, 50)
 	hoverColor.BorderSizePixel = 0
-	hoverColor.Text = "Submit Key"
+	hoverColor.Text = "submit key"
 	hoverColor.TextColor3 = Color3.fromRGB(255, 255, 255)
 	hoverColor.TextSize = 13
 	hoverColor.Font = Enum.Font.GothamBold
@@ -274,7 +274,7 @@ function zay:Run(id)
 	hoverColor.Parent = SubmitStroke
 
 	local baseStroke = Instance.new("UICorner")
-	baseStroke.CornerRadius = UDim.new(0, 8)
+	baseStroke.CornerRadius = UDim.new(0, 6)
 	baseStroke.Parent = hoverColor
 
 	local hoverStroke = Instance.new("UIStroke")
@@ -283,30 +283,30 @@ function zay:Run(id)
 	hoverStroke.Transparency = 1
 	hoverStroke.Parent = hoverColor
 
-	-- Enhanced Fluid Button Animations
+	-- Much Better/Smoother Kinetic Button Dragging and Click Animations
 	local function dragging(dragInput, dragStart, startPos, update, targetPos, delta)
 		dragInput.MouseEnter:Connect(function()
-			TweenService:Create(dragInput, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = update}):Play()
-			TweenService:Create(dragStart, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = targetPos, Thickness = 1.5}):Play()
+			TweenService:Create(dragInput, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = update}):Play()
+			TweenService:Create(dragStart, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = targetPos, Thickness = 1.5}):Play()
 		end)
 		dragInput.MouseLeave:Connect(function()
-			TweenService:Create(dragInput, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = startPos}):Play()
-			TweenService:Create(dragStart, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = delta, Thickness = 1}):Play()
+			TweenService:Create(dragInput, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = startPos}):Play()
+			TweenService:Create(dragStart, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = delta, Thickness = 1}):Play()
 		end)
 		dragInput.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				TweenService:Create(dragInput, TweenInfo.new(0.15, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(dragInput.Size.X.Scale, dragInput.Size.X.Offset - 6, dragInput.Size.Y.Scale, dragInput.Size.Y.Offset - 6)}):Play()
+				TweenService:Create(dragInput, TweenInfo.new(0.1, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(dragInput.Size.X.Scale, dragInput.Size.X.Offset - 6, dragInput.Size.Y.Scale, dragInput.Size.Y.Offset - 4)}):Play()
 			end
 		end)
 		dragInput.InputEnded:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				TweenService:Create(dragInput, TweenInfo.new(0.3, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out), {Size = UDim2.new(dragInput.Size.X.Scale, dragInput.Size.X.Offset + 6, dragInput.Size.Y.Scale, dragInput.Size.Y.Offset + 6)}):Play()
+				TweenService:Create(dragInput, TweenInfo.new(0.4, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out), {Size = UDim2.new(dragInput.Size.X.Scale, dragInput.Size.X.Offset + 6, dragInput.Size.Y.Scale, dragInput.Size.Y.Offset + 4)}):Play()
 			end
 		end)
 	end
 
-	dragging(button, baseColor, Theme.InputBG, Color3.fromRGB(40, 15, 30), Color3.fromRGB(150, 40, 80), Color3.fromRGB(100, 30, 110))
-	dragging(hoverColor, hoverStroke, Color3.fromRGB(50, 15, 60), Color3.fromRGB(75, 20, 90), Color3.fromRGB(200, 50, 220), Theme.Accent)
+	dragging(button, baseColor, Theme.InputBG, Color3.fromRGB(50, 10, 30), Color3.fromRGB(90, 20, 110), Color3.fromRGB(65, 25, 75))
+	dragging(hoverColor, hoverStroke, Color3.fromRGB(45, 15, 50), Color3.fromRGB(70, 20, 80), Color3.fromRGB(140, 20, 170), Theme.Accent)
 
 	local draggingToggle, dragInput, dragStart, startPos
 	nope.InputBegan:Connect(function(input)
@@ -334,7 +334,7 @@ function zay:Run(id)
 	UserInputService.InputChanged:Connect(function(input)
 		if input == dragInput and draggingToggle then
 			local delta = input.Position - dragStart
-			-- Fluid Canvas Trailing drag effect
+			-- Fluid Canvas Trailing Drag Translation Effect
 			TweenService:Create(mother, TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
 				Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 			}):Play()
@@ -346,10 +346,8 @@ function zay:Run(id)
 			clipboardFunc(discordLink) 
 			local oldText = button.Text
 			button.Text = "Link Copied!"
-			button.TextColor3 = Theme.Success
 			task.wait(1.5)
 			button.Text = oldText
-			button.TextColor3 = Color3.fromRGB(240, 220, 240)
 		end
 	end)
 
@@ -362,7 +360,7 @@ function zay:Run(id)
 		local originalText = hoverColor.Text
 		local enteredKey = SubmitCorner.Text
 		hoverColor.Text = "SCANNING..."
-		hoverColor.TextColor3 = Color3.fromRGB(200, 100, 255)
+		hoverColor.TextColor3 = Color3.fromRGB(255, 255, 255)
 
 		local scanOverlay = Instance.new("Frame")
 		scanOverlay.Name = "ScanOverlay"
@@ -371,21 +369,21 @@ function zay:Run(id)
 		scanOverlay.ClipsDescendants = true
 		scanOverlay.ZIndex = 100
 		scanOverlay.Parent = mother
-		Instance.new("UICorner", scanOverlay).CornerRadius = UDim.new(0, 12)
+		Instance.new("UICorner", scanOverlay).CornerRadius = UDim.new(0, 9)
 
 		local laser = Instance.new("Frame")
 		laser.Name = "Laser"
 		laser.Size = UDim2.new(1, 0, 0, 3)
 		laser.Position = UDim2.new(0, 0, -0.1, 0)
-		laser.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		laser.BackgroundColor3 = Color3.fromRGB(255, 50, 100)
 		laser.BorderSizePixel = 0
 		laser.ZIndex = 102
 		laser.Parent = scanOverlay
 
 		local flare = Instance.new("Frame")
-		flare.Size = UDim2.new(1, 0, 0, 80)
-		flare.BackgroundColor3 = Color3.fromRGB(255, 50, 150)
-		flare.BackgroundTransparency = 0.92
+		flare.Size = UDim2.new(1, 0, 0, 60)
+		flare.BackgroundColor3 = Color3.fromRGB(255, 50, 120)
+		flare.BackgroundTransparency = 0.93
 		flare.BorderSizePixel = 0
 		flare.ZIndex = 101
 		flare.Parent = scanOverlay
@@ -396,13 +394,14 @@ function zay:Run(id)
 			NumberSequenceKeypoint.new(1, 1)
 		})
 
-		local scanTime = 0.65
+		-- Faster, sharper scan animations
+		local scanTime = 0.55
 		local tweenInfo = TweenInfo.new(scanTime, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 1, true)
 		local tween = TweenService:Create(laser, tweenInfo, {Position = UDim2.new(0, 0, 1.1, 0)})
 		tween:Play()
 
 		local connection = RunService.RenderStepped:Connect(function()
-			flare.Position = laser.Position - UDim2.new(0, 0, 0, 80)
+			flare.Position = laser.Position - UDim2.new(0, 0, 0, 60)
 		end)
 
 		local data = runkey(enteredKey)
@@ -421,8 +420,8 @@ function zay:Run(id)
 			flare.BackgroundColor3 = Theme.Success
 			
 			hoverColor.Text = "Access Granted!"
-			hoverColor.TextColor3 = Theme.Success
-			TweenService:Create(hoverStroke, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Theme.Success}):Play()
+			hoverColor.TextColor3 = Color3.fromRGB(100, 255, 100)
+			TweenService:Create(hoverStroke, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Theme.Success}):Play()
 			
 			notify("Access Granted", "Welcome back!", 2)
 			task.wait(0.3)
@@ -431,7 +430,7 @@ function zay:Run(id)
 			TweenService:Create(flare, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
 			TweenService:Create(laser, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
 			
-			-- Premium Out-Elastic Scale Collapse
+			-- Crazy Back-Bounce Collapse Exit
 			TweenService:Create(mother, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.new(0, 0, 0, 0), Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
 			task.wait(0.5)
 			no:Destroy()
@@ -439,49 +438,69 @@ function zay:Run(id)
 		else
 			scanOverlay:Destroy()
 			hoverColor.Text = "Incorrect Key!"
-			hoverColor.TextColor3 = Theme.Failure
-			TweenService:Create(hoverStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Theme.Failure}):Play()
+			hoverColor.TextColor3 = Color3.fromRGB(255, 100, 100)
+			TweenService:Create(hoverStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Theme.Failure}):Play()
 			
 			local originalPos = mother.Position
 
-			-- Crazy High-Fidelity 3D Elastic Shake Animation & Flash Red
+			-- Crazy High-Velocity Positional Elastic Shake Sequence
 			task.spawn(function()
-				local shakeIntensity = {14, -12, 9, -7, 4, -2, 0}
+				-- Override to pure error red flash on split sequence
+				local originalSequence = splitGradient.Color
+				splitGradient.Color = ColorSequence.new(Color3.fromRGB(70, 0, 10))
+				
+				local shakeIntensity = {16, -14, 11, -9, 6, -3, 0}
 				for _, offset in ipairs(shakeIntensity) do
-					TweenService:Create(mother, TweenInfo.new(0.04, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
-						Position = originalPos + UDim2.new(0, offset, 0, 0)
+					TweenService:Create(mother, TweenInfo.new(0.03, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+						Position = originalPos + UDim2.new(0, offset, 0, math.random(-3, 3))
 					}):Play()
-					bgGradient.Color = ColorSequence.new(Color3.fromRGB(80, 10, 20), Color3.fromRGB(40, 5, 15))
-					task.wait(0.04)
+					task.wait(0.03)
 				end
-				-- Restore split gradient smooth physics
-				TweenService:Create(mother, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = originalPos}):Play()
-				bgGradient.Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, Theme.GradientLeft),
-					ColorSequenceKeypoint.new(1, Theme.GradientRight)
-				})
+				
+				-- Return background to correct dark red / purple split design
+				splitGradient.Color = originalSequence
+				TweenService:Create(mother, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = originalPos}):Play()
 			end)
 
 			notify("Denied", "Incorrect Key! Try again.", 3)
 			task.wait(1.5)
 			
-			hoverColor.Text = "Submit Key"
+			hoverColor.Text = "submit key"
 			hoverColor.TextColor3 = Color3.fromRGB(255, 255, 255)
-			TweenService:Create(hoverStroke, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Theme.Accent}):Play()
+			TweenService:Create(hoverStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Theme.Accent}):Play()
 		end
 	end)
 
-	-- Introduction Elastic Bounce Physics Intro Sequence
+	-- Introduction Transitions & Text "..." Animation Sequence
 	task.spawn(function()
-		TweenService:Create(mother, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 250, 0, 70)}):Play()
+		-- Smooth initial snap introduction
+		TweenService:Create(mother, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 250, 0, 70)}):Play()
 		task.wait(0.2)
-		TweenService:Create(dogpound, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
-		task.wait(2.0)
+		TweenService:Create(dogpound, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
+		
+		-- Active ... Loading Loop Thread
+		local loadingActive = true
+		task.spawn(function()
+			local baseText = "mom im famous"
+			local dots = {"", ".", "..", "..."}
+			local index = 1
+			while loadingActive do
+				dogpound.Text = baseText .. dots[index]
+				index = index + 1
+				if index > 4 then index = 1 end
+				task.wait(0.35)
+			end
+			dogpound.Text = baseText
+		end)
+
+		task.wait(2.2)
+		loadingActive = false -- End loop before fading text
+		
 		TweenService:Create(dogpound, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {TextTransparency = 1}):Play()
 		task.wait(0.3)
 		
-		-- Smooth Cinematic Spring Transition into Split Windows Setup
-		TweenService:Create(mother, TweenInfo.new(0.75, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 420, 0, 260), Position = UDim2.new(0.5, -210, 0.5, -130)}):Play()
+		-- Aggressive High-Fidelity Spring Resize Transition 
+		TweenService:Create(mother, TweenInfo.new(0.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 420, 0, 260), Position = UDim2.new(0.5, -210, 0.5, -130)}):Play()
 		TweenService:Create(dude, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 0}):Play()
 		
 		TweenService:Create(nope, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
